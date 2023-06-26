@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import com.mtteam.geolocrt.ui.theme.GeoLocRTTheme
 
-class MainActivity : ComponentActivity() {
+class  MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ActivityCompat.requestPermissions(

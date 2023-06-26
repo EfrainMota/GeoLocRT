@@ -20,4 +20,8 @@ class LocationApp: Application() {
             notificationManager.createNotificationChannel(channel)
         }
     }
+
+    override fun onTerminate() {
+        super.onTerminate()
+    }
 }

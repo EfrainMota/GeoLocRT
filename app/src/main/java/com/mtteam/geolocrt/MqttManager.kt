@@ -33,6 +33,7 @@ class MqttManager(private val context: Context) {
             connectOptions.isCleanSession = true
             connectOptions.password = pwd.toCharArray()
             connectOptions.userName = usr
+            connectOptions.isAutomaticReconnect = true
             try {
                 val caCrtFile = context.resources.openRawResource(R.raw.ca)
                 connectOptions.socketFactory = getSingleSocketFactory(caCrtFile)
@@ -76,12 +77,8 @@ class MqttManager(private val context: Context) {
     }
 
     fun publish(topic: String, message: String) {
-        try {
             val mqttMessage = MqttMessage(message.toByteArray())
             client!!.publish(topic, mqttMessage)
-        } catch (e: MqttException) {
-            e.printStackTrace()
-        }
     }
 
     fun subscribe(topic: String?) {
@@ -90,5 +87,11 @@ class MqttManager(private val context: Context) {
         } catch (e: MqttException) {
             e.printStackTrace()
         }
+    }
+
+    fun  tryReconnect()
+    {
+        if (!client!!.isConnected)
+            client!!.reconnect()
     }
 }
